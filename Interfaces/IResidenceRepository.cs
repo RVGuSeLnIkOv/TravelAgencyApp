@@ -6,5 +6,6 @@ namespace TravelAgencyApp.Interfaces
     {
         ICollection<Residence> GetResidences(int idCity);
         int GetIdResidence(string residenceName, string stars);
+        Residence GetResidence(int id);
     }
 }

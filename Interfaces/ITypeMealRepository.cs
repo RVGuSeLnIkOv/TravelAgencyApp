@@ -6,5 +6,6 @@ namespace TravelAgencyApp.Interfaces
     {
         ICollection<TypeMeal> GetTypesMeal();
         int GetIdTypeMeal(string typeMealName);
+        TypeMeal GetTypeMeal(int id);
     }
 }

@@ -2,7 +2,7 @@
 {
     public class TourDto
     {
-        public string IdTour { get; set; }
+        public int IdTour { get; set; }
         public int IdTourOperator { get; set; }
         public int IdResidence { get; set; }
         public int IdTypeMeal { get; set; }

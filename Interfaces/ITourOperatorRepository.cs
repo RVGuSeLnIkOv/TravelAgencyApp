@@ -6,5 +6,6 @@ namespace TravelAgencyApp.Interfaces
     {
         ICollection<TourOperator> GetTourOperators();
         int GetIdTourOperator(string tourOperatorName);
+        TourOperator GetTourOperator(int id);
     }
 }

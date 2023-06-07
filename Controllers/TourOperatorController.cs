@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelAgencyApp.Dto;
 using TravelAgencyApp.Interfaces;
 using TravelAgencyApp.Models;
+using TravelAgencyApp.Repository;
 
 namespace TravelAgencyApp.Controllers
 {
@@ -35,17 +36,17 @@ namespace TravelAgencyApp.Controllers
             return Ok(tourOperators);
         }
 
-        [HttpGet("api/TourOperator/{tourOperatorName}")]
-        [ProducesResponseType(200, Type = typeof(int))]
+        [HttpGet("api/TourOperator/{id}")]
+        [ProducesResponseType(200, Type = typeof(TourOperator))]
         [ProducesResponseType(400)]
-        public IActionResult GetIdTourOperator(string tourOperatorName)
+        public IActionResult GetTourOperator(int id)
         {
-            var id = _tourOperatorRepository.GetIdTourOperator(tourOperatorName);
+            var tourOperator = _mapper.Map<TourOperatorDto>(_tourOperatorRepository.GetTourOperator(id));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(id);
+            return Ok(tourOperator);
         }
     }
 }

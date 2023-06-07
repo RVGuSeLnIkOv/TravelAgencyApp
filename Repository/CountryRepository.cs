@@ -18,6 +18,11 @@ namespace TravelAgencyApp.Repository
             return _context.Countries.OrderBy(c => c.CountryName).ToList();
         }
 
+        public Country GetCountry(int id)
+        {
+            return _context.Countries.Where(c => c.IdCountry == id).FirstOrDefault();
+        }
+
         public int GetIdCountry(string countryName)
         {
             var country = _context.Countries.Where(c => c.CountryName == countryName).FirstOrDefault();

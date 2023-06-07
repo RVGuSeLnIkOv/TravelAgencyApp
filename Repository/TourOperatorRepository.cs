@@ -23,6 +23,11 @@ namespace TravelAgencyApp.Repository
             return tourOperator.IdTourOperator;
         }
 
+        public TourOperator GetTourOperator(int id)
+        {
+            return _context.TourOperators.Where(to => to.IdTourOperator == id).FirstOrDefault();
+        }
+
         public ICollection<TourOperator> GetTourOperators()
         {
             return _context.TourOperators.OrderBy(to => to.TourOperatorName).ToList();

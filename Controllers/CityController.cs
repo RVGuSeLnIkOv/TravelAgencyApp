@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelAgencyApp.Dto;
 using TravelAgencyApp.Interfaces;
 using TravelAgencyApp.Models;
+using TravelAgencyApp.Repository;
 
 namespace TravelAgencyApp.Controllers
 {
@@ -22,17 +23,17 @@ namespace TravelAgencyApp.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("api/City/{cityName}")]
-        [ProducesResponseType(200, Type = typeof(int))]
+        [HttpGet("api/City/{id}")]
+        [ProducesResponseType(200, Type = typeof(City))]
         [ProducesResponseType(400)]
-        public IActionResult GetIdCity(string cityName)
+        public IActionResult GetCity(int id)
         {
-            var id = _cityRepository.GetIdCity(cityName);
+            var city = _mapper.Map<CityDto>(_cityRepository.GetCity(id));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(id);
+            return Ok(city);
         }
 
         [HttpGet("api/City/{idCity}/Residences")]

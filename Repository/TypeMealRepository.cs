@@ -23,6 +23,11 @@ namespace TravelAgencyApp.Repository
             return typeMeal.IdTypeMeal;
         }
 
+        public TypeMeal GetTypeMeal(int id)
+        {
+            return _context.TypesMeal.Where(tm => tm.IdTypeMeal == id).FirstOrDefault();
+        }
+
         public ICollection<TypeMeal> GetTypesMeal()
         {
             return _context.TypesMeal.OrderBy(tm => tm.IdTypeMeal).ToList();

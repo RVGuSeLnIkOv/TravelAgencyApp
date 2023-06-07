@@ -40,17 +40,17 @@ namespace TravelAgencyApp.Controllers
             return Ok(countries);
         }
 
-        [HttpGet("api/Country/{countryName}")]
-        [ProducesResponseType(200, Type = typeof(int))]
+        [HttpGet("api/Country/{id}")]
+        [ProducesResponseType(200, Type = typeof(Country))]
         [ProducesResponseType(400)]
-        public IActionResult GetIdCountry(string countryName)
+        public IActionResult GetCountry(int id)
         {
-            var id = _countryRepository.GetIdCountry(countryName);
+            var country = _mapper.Map<CountryDto>(_countryRepository.GetCountry(id));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(id);
+            return Ok(country);
         }
 
         [HttpGet("api/Country/{idCountry}/Cities")]

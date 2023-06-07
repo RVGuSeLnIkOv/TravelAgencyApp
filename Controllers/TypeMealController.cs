@@ -36,17 +36,17 @@ namespace TravelAgencyApp.Controllers
             return Ok(typesMeal);
         }
 
-        [HttpGet("api/TypeMeal/{typeMealName}")]
-        [ProducesResponseType(200, Type = typeof(int))]
+        [HttpGet("api/TypeMeal/{id}")]
+        [ProducesResponseType(200, Type = typeof(TypeMeal))]
         [ProducesResponseType(400)]
-        public IActionResult GetIdTypeMeal(string typeMealName)
+        public IActionResult GetTypeMeal(int id)
         {
-            var id = _typeMealRepository.GetIdTypeMeal(typeMealName);
+            var typeMeal = _mapper.Map<TypeMealDto>(_typeMealRepository.GetTypeMeal(id));
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(id);
+            return Ok(typeMeal);
         }
     }
 }

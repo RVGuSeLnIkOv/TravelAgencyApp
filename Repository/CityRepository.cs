@@ -18,6 +18,11 @@ namespace TravelAgencyApp.Repository
             return _context.Cities.Where(c => c.IdCountry == idCountry).OrderBy(c => c.CityName).ToList();
         }
 
+        public City GetCity(int id)
+        {
+            return _context.Cities.Where(c => c.IdCity == id).FirstOrDefault();
+        }
+
         public int GetIdCity(string cityName)
         {
             var city = _context.Cities.Where(c => c.CityName == cityName).FirstOrDefault();

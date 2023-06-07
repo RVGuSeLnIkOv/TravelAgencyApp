@@ -6,7 +6,7 @@ namespace TravelAgencyApp.Models
     {
         [Key]
         public int IdTouristTour { get; set; }
-        public string IdTour { get; set; }
+        public int IdTour { get; set; }
         public int IdTourist { get; set; }
 
         public virtual Tour Tour { get; set; }

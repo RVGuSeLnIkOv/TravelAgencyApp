@@ -17,8 +17,19 @@ namespace TravelAgencyApp.Repository
 
         public bool ArchiveTour(Tour tour)
         {
-            tour.IsArchive = true;
-            _context.Update(tour);
+            var newTour = new Tour
+            {
+                IdTour = tour.IdTour,
+                IdTourOperator = tour.IdTourOperator,
+                IdResidence = tour.IdResidence,
+                IdTypeMeal = tour.IdTypeMeal,
+                CheckinDate = tour.CheckinDate,
+                CheckoutDate = tour.CheckoutDate,
+                Duration = tour.Duration,
+                IsArchive = true
+
+            };
+            _context.Update(newTour);
 
             return Save();
         }
@@ -29,8 +40,7 @@ namespace TravelAgencyApp.Repository
             if (!string.IsNullOrEmpty(tour.CheckinDate.ToString())
                 && tour.CheckinDate != DateTime.MinValue
                 && !string.IsNullOrEmpty(tour.CheckoutDate.ToString())
-                && tour.CheckoutDate != DateTime.MinValue
-                && Checking.CheckingInt(tour.Duration.ToString(), 1, 365) != -1)
+                && tour.CheckoutDate != DateTime.MinValue)
             {
                 return true;
             }
@@ -53,20 +63,20 @@ namespace TravelAgencyApp.Repository
             return true;
         }
 
-        public string CreateTour(Tour tour, List<int> tourists)
+        public int CreateTour(Tour tour, List<int> tourists)
         {
             if (!CheckingTourists(tourists))
-                return "-1";
+                return -1;
 
-            string idStr = "tour_" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            TimeSpan difference = tour.CheckoutDate - tour.CheckinDate;
 
-            tour.IdTour = idStr;
             tour.IsArchive = false;
+            tour.Duration = difference.Days;
 
             _context.Tours.Add(tour);
 
             if (!Save())
-                return "-1";
+                return -1;
 
             foreach (int touristId in tourists)
             {
@@ -83,7 +93,7 @@ namespace TravelAgencyApp.Repository
             }
 
             if (!Save())
-                return "-1";
+                return -1;
 
             return tour.IdTour;
         }
@@ -98,7 +108,7 @@ namespace TravelAgencyApp.Repository
             return _context.Tours.Where(t => t.IsArchive == true).OrderBy(t => t.IdTour).ToList();
         }
 
-        public Tour GetTour(string id)
+        public Tour GetTour(int id)
         {
             return _context.Tours.Where(t => t.IdTour == id).FirstOrDefault();
         }
@@ -109,7 +119,7 @@ namespace TravelAgencyApp.Repository
             return saved > 0;
         }
 
-        public bool TourExists(string id)
+        public bool TourExists(int id)
         {
             return _context.Tours.Any(t => t.IdTour == id);
         }
@@ -128,7 +138,7 @@ namespace TravelAgencyApp.Repository
             return Save();
         }
 
-        public ICollection<Tourist> GetTouristsOnTour(string id)
+        public ICollection<Tourist> GetTouristsOnTour(int id)
         {
             var touristsId = _context.TouristsTours.Where(tt => tt.IdTour == id).Select(tt => tt.IdTourist).ToList();
 

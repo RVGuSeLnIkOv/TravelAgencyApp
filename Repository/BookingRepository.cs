@@ -53,7 +53,7 @@ namespace TravelAgencyApp.Repository
             return _context.Bookings.Where(b => b.IdBooking == id).FirstOrDefault();
         }
 
-        public ICollection<Booking> GetBookings(string idTour)
+        public ICollection<Booking> GetBookings(int idTour)
         {
             return _context.Bookings.Where(b => b.IdTour == idTour).ToList();
         }

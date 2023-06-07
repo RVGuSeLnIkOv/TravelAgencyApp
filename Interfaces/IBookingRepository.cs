@@ -5,7 +5,7 @@ namespace TravelAgencyApp.Interfaces
 {
     public interface IBookingRepository
     {
-        ICollection<Booking> GetBookings(string idTour);
+        ICollection<Booking> GetBookings(int idTour);
         Booking GetBooking(int id);
         bool CreateBooking(Booking booking);
         bool CheckingBooking(Booking booking);

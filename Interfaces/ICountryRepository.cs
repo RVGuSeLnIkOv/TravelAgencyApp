@@ -6,5 +6,6 @@ namespace TravelAgencyApp.Interfaces
     {
         ICollection<Country> GetCountries();
         int GetIdCountry(string countryName);
+        Country GetCountry(int id);
     }
 }

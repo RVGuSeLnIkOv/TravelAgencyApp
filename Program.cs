@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TravelAgencyApp.Data;
 using TravelAgencyApp.Interfaces;
 using TravelAgencyApp.Repository;
+using Microsoft.Extensions.DependencyInjection;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

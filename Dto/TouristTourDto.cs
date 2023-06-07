@@ -3,7 +3,7 @@
     public class TouristTourDto
     {
         public int IdTouristTour { get; set; }
-        public string IdTour { get; set; }
+        public int IdTour { get; set; }
         public int IdTourist { get; set; }
     }
 }

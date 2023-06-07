@@ -61,7 +61,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(200, Type = typeof(Tour))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetTour(string id)
+        public IActionResult GetTour(int id)
         {
             if (!_tourRepository.TourExists(id))
                 return NotFound();
@@ -78,7 +78,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Booking>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetBookings(string id)
+        public IActionResult GetBookings(int id)
         {
             if (!_tourRepository.TourExists(id))
                 return NotFound();
@@ -98,7 +98,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Tourist>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetTourists(string id)
+        public IActionResult GetTourists(int id)
         {
             if (!_tourRepository.TourExists(id))
                 return NotFound();
@@ -115,7 +115,7 @@ namespace TravelAgencyApp.Controllers
         }
 
         [HttpPost("api/Tour")]
-        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(200, Type = typeof(int))]
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
         [ProducesResponseType(500)]
@@ -137,7 +137,7 @@ namespace TravelAgencyApp.Controllers
 
             var result = _tourRepository.CreateTour(tourMap, tourists);
 
-            if (result == "-1")
+            if (result == -1)
             {
                 ModelState.AddModelError("", "Something went wrong");
                 return StatusCode(500, ModelState);
@@ -152,7 +152,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(422)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateTour(string id, [FromBody] TourDto updateTour)
+        public IActionResult UpdateTour(int id, [FromBody] TourDto updateTour)
         {
             if (updateTour == null)
                 return BadRequest(ModelState);
@@ -189,7 +189,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(422)]
         [ProducesResponseType(500)]
-        public IActionResult ArchiveTour(string id, [FromBody] TourDto archiveTour)
+        public IActionResult ArchiveTour(int id, [FromBody] TourDto archiveTour)
         {
             if (archiveTour == null)
                 return BadRequest(ModelState);
@@ -220,7 +220,7 @@ namespace TravelAgencyApp.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(422)]
         [ProducesResponseType(500)]
-        public IActionResult UnarchiveTour(string id, [FromBody] TourDto unarchiveTour)
+        public IActionResult UnarchiveTour(int id, [FromBody] TourDto unarchiveTour)
         {
             if (unarchiveTour == null)
                 return BadRequest(ModelState);

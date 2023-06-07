@@ -23,6 +23,11 @@ namespace TravelAgencyApp.Repository
             return residence.IdResidence;
         }
 
+        public Residence GetResidence(int id)
+        {
+            return _context.Residences.Where(r => r.IdResidence == id).FirstOrDefault();
+        }
+
         public ICollection<Residence> GetResidences(int idCity)
         {
             return _context.Residences.Where(r => r.IdCity == idCity).OrderBy(r => r.ResidenceName).ToList();
